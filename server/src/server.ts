@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors'; // הוסף את זה!
 import dotenv from 'dotenv';
 import { connectDB } from './config/database';
 
@@ -17,6 +18,14 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
 connectDB();
+
+// CORS middleware - הוסף את זה לפני express.json()!
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Basic middleware
 app.use(express.json());
