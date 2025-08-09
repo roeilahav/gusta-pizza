@@ -1,70 +1,26 @@
-// API Response wrapper
-export interface ApiResponse<T> {
-  success: boolean;
-  data: T;
-  message?: string;
-  count?: number;
-}
-
-// =================== PIZZA TYPES ===================
-// Matches backend/src/menuItems/Pizza.ts
-export interface Pizza {
-  _id: string;
-  name: string;
-  description: string;
-  price: number;
-  size?: 'regular' | 'personal';
-  toppings?: string[];
-  image: string;
-  isSpecial?: boolean;
-  isVegan?: boolean;
-  isAvailable: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-// =================== TOPPING TYPES ===================
-// Matches backend/src/menuItems/Topping.ts
-export interface Topping {
-  _id: string;
-  name: string;
-  price: number;
-  category: '6' | '10' | '12';
-  image?: string;
-  isAvailable: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-// =================== DRINK TYPES ===================
-// Base interface - matches backend/src/menuItems/drinks/DrinkBase.ts
-export interface DrinkBase {
+// Base types
+export interface IDrinkBase {
   _id: string;
   name: string;
   image?: string;
   isAvailable: boolean;
   category: 'soft' | 'beer' | 'wine';
-  createdAt?: string;
-  updatedAt?: string;
 }
 
-// Matches backend/src/menuItems/drinks/SoftDrink.ts
-export interface SoftDrink extends DrinkBase {
+// Drink types
+export interface ISoftDrink extends IDrinkBase {
   category: 'soft';
   price: number;
 }
 
-// Matches backend/src/menuItems/drinks/BeerDrink.ts
-export interface BeerDrink extends DrinkBase {
+export interface IBeerDrink extends IDrinkBase {
   category: 'beer';
   isDraft?: boolean;
-  size?: 'third' | 'half' | 'bottle';
+  size: 'third' | 'half' | 'bottle';
   price: number;
-  alcoholPercentage?: number;
 }
 
-// Matches backend/src/menuItems/drinks/WineDrink.ts
-export interface WineDrink extends DrinkBase {
+export interface IWineDrink extends IDrinkBase {
   category: 'wine';
   winery?: string;
   origin?: string;
@@ -72,20 +28,43 @@ export interface WineDrink extends DrinkBase {
     glass: number;
     bottle: number;
   };
-  alcoholPercentage?: number;
-  wineDetails?: {
-    color: 'white' | 'red' | 'rose';
-    region: string;
-    vintage?: number;
-  };
 }
 
-// Union type for all drinks
-export type Drink = SoftDrink | BeerDrink | WineDrink;
+export type IDrink = ISoftDrink | IBeerDrink | IWineDrink;
 
-// =================== SIDE ITEM TYPES ===================
-// Matches backend/src/menuItems/SideItem.ts
-export interface SideItem {
+// Menu types
+export interface IPizza {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  size?: 'regular' | 'personal';
+  toppings: ITopping[];
+  isSpecial?: boolean;
+  isVegan?: boolean;
+  image: string;
+  isAvailable: boolean;
+}
+
+export interface ITopping {
+  _id: string;
+  name: string;
+  price: number;
+  category: '6' | '10' | '12';
+  image?: string;
+  isAvailable: boolean;
+}
+
+export interface IDessert {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  isAvailable: boolean;
+}
+
+export interface ISideItem {
   _id: string;
   name: string;
   description: string;
@@ -94,35 +73,45 @@ export interface SideItem {
   ingredients?: string[];
   image: string;
   isAvailable: boolean;
-  createdAt?: string;
-  updatedAt?: string;
 }
 
-// =================== DESSERT TYPES ===================
-// Matches backend/src/menuItems/Dessert.ts
-export interface Dessert {
-  _id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  isAvailable: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
-// =================== CART TYPES ===================
-export interface CartItem {
-  pizza: Pizza;
+// Cart types
+export interface ICartPizza {
+  id: string;
+  type: 'pizza';
+  item: IPizza;
   quantity: number;
-  selectedToppings?: Topping[];
-  totalPrice: number;
-  id: string; // unique cart item id
+  selectedToppings: ITopping[];
+  specialInstructions?: string;
 }
 
-export interface CartState {
-  items: CartItem[];
-  totalItems: number;
-  totalPrice: number;
-  isOpen: boolean;
+export interface ICartDrink {
+  id: string;
+  type: 'drink';
+  item: IDrink;
+  quantity: number;
+  size?: 'glass' | 'bottle';
+}
+
+export interface ICartDessert {
+  id: string;
+  type: 'dessert';
+  item: IDessert;
+  quantity: number;
+}
+
+export interface ICartSideItem {
+  id: string;
+  type: 'side';
+  item: ISideItem;
+  quantity: number;
+}
+
+export type ICartItem = ICartPizza | ICartDrink | ICartDessert | ICartSideItem;
+
+// API Response types
+export interface ApiResponse<T> {
+  success: boolean;
+  data: T;
+  message?: string;
 }
