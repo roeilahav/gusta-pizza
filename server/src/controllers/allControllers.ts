@@ -1,3 +1,6 @@
+// Business logic handlers - the "brain" that processes requests and talks to database
+
+
 import { createCrudController } from './baseCrudController';
 import Pizza from '../models/Pizza';
 import Topping from '../models/Topping';

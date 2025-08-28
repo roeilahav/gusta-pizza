@@ -1,5 +1,7 @@
+//  Gusta Pizza של API - זה הקובץ שמתחיל את כל השרת ומגדיר את הבסיס לכל ה 
+
 import express from 'express';
-import cors from 'cors'; // הוסף את זה!
+import cors from 'cors'; 
 import dotenv from 'dotenv';
 import { connectDB } from './config/database';
 

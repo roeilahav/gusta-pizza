@@ -1,3 +1,6 @@
+// Static menu data - predefined pizzas, drinks, toppings (like seed data)
+
+
 import { Document } from 'mongoose';
 import { ITopping } from './Topping';
 

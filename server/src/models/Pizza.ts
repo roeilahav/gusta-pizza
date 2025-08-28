@@ -22,6 +22,8 @@ const PizzaSchema: Schema = new Schema({
     enum: ['regular', 'personal'],
     required: false
   },
+
+  // needs to be <ITopping[]> type
   toppings: [{
     type: String
   }],

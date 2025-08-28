@@ -1,3 +1,6 @@
+// URL mapping - connects web requests to the right controller functions
+
+
 import express from 'express';
 import { dessertController } from '../controllers/allControllers';
 

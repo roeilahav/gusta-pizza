@@ -1,3 +1,6 @@
+// Database schemas - defines how data is structured and stored in MongoDB
+
+
 import mongoose, { Schema } from 'mongoose';
 import { IBeerDrink } from '../menuItems/drinks/BeerDrink';
 

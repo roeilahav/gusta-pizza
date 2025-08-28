@@ -1,3 +1,5 @@
+// Database connection setup - connects your app to MongoDB
+
 import mongoose from 'mongoose';
 
 export const connectDB = async () => {
