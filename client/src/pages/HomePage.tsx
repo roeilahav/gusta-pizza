@@ -73,7 +73,7 @@ const HomePage = () => {
       <Box
         sx={{
           minHeight: '100vh',
-          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 50%, #7C1D33 100%)`,
           color: 'white',
           position: 'relative',
           overflow: 'hidden',
@@ -86,21 +86,30 @@ const HomePage = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'radial-gradient(circle at 20% 80%, rgba(252, 211, 77, 0.2) 0%, transparent 50%)',
+            background: 'radial-gradient(ellipse at 30% 20%, rgba(252, 211, 77, 0.3) 0%, transparent 40%), radial-gradient(ellipse at 70% 80%, rgba(220, 38, 38, 0.2) 0%, transparent 50%)',
           },
           '&::after': {
             content: '""',
             position: 'absolute',
-            top: '-50%',
-            right: '-20%',
-            width: '80%',
-            height: '200%',
-            background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)',
-            animation: 'float 20s ease-in-out infinite',
+            top: '-30%',
+            right: '-15%',
+            width: '60%',
+            height: '150%',
+            background: 'conic-gradient(from 45deg, rgba(252, 211, 77, 0.1) 0deg, transparent 90deg, rgba(255,255,255,0.05) 180deg, transparent 270deg)',
+            animation: 'rotate 30s linear infinite',
+            borderRadius: '50%',
+          },
+          '@keyframes rotate': {
+            '0%': { transform: 'rotate(0deg)' },
+            '100%': { transform: 'rotate(360deg)' },
           },
           '@keyframes float': {
             '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
             '50%': { transform: 'translateY(-20px) rotate(10deg)' },
+          },
+          '@keyframes spin': {
+            '0%': { transform: 'rotate(0deg)' },
+            '100%': { transform: 'rotate(360deg)' },
           },
         }}
       >
@@ -124,35 +133,55 @@ const HomePage = () => {
                   <Typography
                     variant="h1"
                     sx={{
-                      fontSize: { xs: '3rem', md: '5rem' },
-                      fontWeight: 800,
-                      mb: 2,
-                      textShadow: '3px 3px 6px rgba(0,0,0,0.3)',
-                      lineHeight: 1.1,
+                      fontSize: { xs: '3.5rem', md: '6rem' },
+                      fontWeight: 900,
+                      mb: 3,
+                      textShadow: '4px 4px 12px rgba(0,0,0,0.4)',
+                      lineHeight: 0.9,
+                      background: `linear-gradient(135deg, ${theme.palette.secondary.main} 0%, #FFF59D 50%, ${theme.palette.secondary.light} 100%)`,
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      position: 'relative',
+                      '&::before': {
+                        content: '"GustaPizza"',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: -1,
+                        background: 'rgba(255,255,255,0.1)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        transform: 'translate(4px, 4px)',
+                      },
                     }}
                   >
-                    <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-                      GustaPizza
-                    </Box>
+                    GustaPizza
                   </Typography>
                   
                   <Typography
                     variant="h4"
                     sx={{
-                      mb: 4,
-                      fontSize: { xs: '1.5rem', md: '2rem' },
+                      mb: 5,
+                      fontSize: { xs: '1.8rem', md: '2.5rem' },
                       opacity: 0.95,
-                      fontWeight: 300,
+                      fontWeight: 400,
+                      textShadow: '2px 2px 8px rgba(0,0,0,0.3)',
+                      '& .highlight': {
+                        color: theme.palette.secondary.main,
+                        fontWeight: 600,
+                        textShadow: '3px 3px 10px rgba(252, 211, 77, 0.4)',
+                      },
                     }}
                   >
-                    הפיצה האיטלקית האותנטית
+                    הפיצה האיטלקית
                     <br />
-                    <Box component="span" sx={{ color: theme.palette.secondary.main, fontWeight: 500 }}>
-                      בבאר שבע
+                    <Box component="span" className="highlight">
+                      האותנטית בבאר שבע
                     </Box>
                   </Typography>
 
-                  <Box sx={{ display: 'flex', gap: 2, mb: 3, flexWrap: 'wrap' }}>
+                  <Box sx={{ display: 'flex', gap: 3, mb: 4, flexWrap: 'wrap', justifyContent: { xs: 'center', md: 'flex-start' } }}>
                     <Button
                       variant="contained"
                       size="large"
@@ -203,14 +232,14 @@ const HomePage = () => {
                     </Button>
                   </Box>
 
-                  <Box sx={{ display: 'flex', gap: 3, mt: 4 }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <CheckCircle sx={{ color: theme.palette.secondary.main }} />
-                      <Typography>כשר</Typography>
+                  <Box sx={{ display: 'flex', gap: { xs: 2, md: 4 }, mt: 5, flexWrap: 'wrap', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, transition: 'transform 0.3s ease', '&:hover': { transform: 'scale(1.05)' } }}>
+                      <CheckCircle sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }} />
+                      <Typography sx={{ fontWeight: 600, fontSize: '1.1rem' }}>כשר</Typography>
                     </Box>
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <CheckCircle sx={{ color: theme.palette.secondary.main }} />
-                      <Typography>משלוח חינם מ-₪50</Typography>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, transition: 'transform 0.3s ease', '&:hover': { transform: 'scale(1.05)' } }}>
+                      <CheckCircle sx={{ color: theme.palette.secondary.main, fontSize: '1.4rem' }} />
+                      <Typography sx={{ fontWeight: 600, fontSize: '1.1rem' }}>משלוח חינם מ-₪50</Typography>
                     </Box>
                   </Box>
                 </Box>
@@ -272,55 +301,88 @@ const HomePage = () => {
       </Box>
 
       {/* Features Section */}
-      <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
-        <Fade in={loaded} timeout={2000}>
-          <Box>
-            <Typography
-              variant="h2"
-              align="center"
-              sx={{
-                mb: 2,
-                fontSize: { xs: '2.5rem', md: '3.5rem' },
-                fontWeight: 'bold',
-                background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              למה אנחנו מיוחדים?
-            </Typography>
-            <Typography
-              variant="h6"
-              align="center"
-              color="text.secondary"
-              sx={{ mb: 8, maxWidth: 600, mx: 'auto' }}
-            >
-              חוויה קולינרית איטלקית אותנטית עם נגיעה ישראלית
-            </Typography>
+      <Box sx={{ py: { xs: 10, md: 16 }, backgroundColor: '#FAFAFA', position: 'relative' }}>
+        <Container maxWidth="lg">
+          <Fade in={loaded} timeout={2000}>
+            <Box>
+              <Typography
+                variant="h2"
+                align="center"
+                sx={{
+                  mb: 3,
+                  fontSize: { xs: '2.8rem', md: '4rem' },
+                  fontWeight: 800,
+                  background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 50%, #7C1D33 100%)`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  position: 'relative',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    bottom: '-10px',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: 80,
+                    height: 4,
+                    background: `linear-gradient(90deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.light})`,
+                    borderRadius: 2,
+                  },
+                }}
+              >
+                למה אנחנו מיוחדים?
+              </Typography>
+              <Typography
+                variant="h5"
+                align="center"
+                color="text.secondary"
+                sx={{ mb: 12, maxWidth: 700, mx: 'auto', fontSize: { xs: '1.3rem', md: '1.6rem' }, lineHeight: 1.6 }}
+              >
+                חוויה קולינרית איטלקית אותנטית עם נגיעה ישראלית ייחודית
+              </Typography>
 
-            <Grid container spacing={4}>
+            <Grid container spacing={5}>
               {features.map((feature, index) => (
                 <Grid size={{ xs: 12, md: 4 }} key={index}>
-                  <Zoom in={loaded} timeout={1000 + index * 200}>
+                  <Zoom in={loaded} timeout={1200 + index * 300}>
                     <Card
                       sx={{
                         height: '100%',
                         textAlign: 'center',
-                        py: 5,
-                        px: 3,
-                        background: 'white',
+                        py: 6,
+                        px: 4,
+                        background: 'linear-gradient(145deg, #FFFFFF 0%, #F9FAFB 100%)',
                         position: 'relative',
                         overflow: 'visible',
                         border: '2px solid transparent',
-                        transition: 'all 0.3s ease',
+                        borderRadius: 3,
+                        transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                        '&::before': {
+                          content: '""',
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          background: `linear-gradient(135deg, ${feature.color}10 0%, transparent 100%)`,
+                          opacity: 0,
+                          transition: 'opacity 0.4s ease',
+                          borderRadius: 'inherit',
+                        },
                         '&:hover': {
-                          transform: 'translateY(-10px)',
+                          transform: 'translateY(-15px) scale(1.02)',
                           borderColor: feature.color,
-                          boxShadow: `0 20px 40px ${feature.color}20`,
+                          boxShadow: `0 25px 50px -12px ${feature.color}30, 0 0 0 1px ${feature.color}20`,
+                          '&::before': {
+                            opacity: 1,
+                          },
                           '& .feature-icon': {
-                            transform: 'scale(1.2) rotate(10deg)',
+                            transform: 'scale(1.3) rotate(15deg)',
                             backgroundColor: feature.color,
                             color: 'white',
+                            boxShadow: `0 10px 25px ${feature.color}40`,
+                          },
+                          '& .feature-title': {
+                            color: feature.color,
                           },
                         },
                       }}
@@ -328,25 +390,48 @@ const HomePage = () => {
                       <Box
                         className="feature-icon"
                         sx={{
-                          width: 100,
-                          height: 100,
-                          borderRadius: '30% 70% 70% 30% / 30% 30% 70% 70%',
+                          width: 120,
+                          height: 120,
+                          borderRadius: '25% 75% 75% 25% / 25% 25% 75% 75%',
                           backgroundColor: `${feature.color}15`,
                           color: feature.color,
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           mx: 'auto',
-                          mb: 3,
-                          transition: 'all 0.3s ease',
+                          mb: 4,
+                          transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                          position: 'relative',
+                          '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            top: '-5px',
+                            left: '-5px',
+                            right: '-5px',
+                            bottom: '-5px',
+                            borderRadius: 'inherit',
+                            background: `conic-gradient(from 0deg, ${feature.color}30, transparent, ${feature.color}30)`,
+                            zIndex: -1,
+                            opacity: 0,
+                            animation: 'spin 3s linear infinite',
+                          },
                         }}
                       >
                         {feature.icon}
                       </Box>
-                      <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>
+                      <Typography 
+                        variant="h5" 
+                        className="feature-title"
+                        gutterBottom 
+                        sx={{ fontWeight: 700, mb: 2, transition: 'color 0.3s ease' }}
+                      >
                         {feature.title}
                       </Typography>
-                      <Typography variant="body1" color="text.secondary">
+                      <Typography 
+                        variant="body1" 
+                        color="text.secondary"
+                        sx={{ fontSize: '1.1rem', lineHeight: 1.7 }}
+                      >
                         {feature.description}
                       </Typography>
                     </Card>
@@ -356,58 +441,207 @@ const HomePage = () => {
             </Grid>
           </Box>
         </Fade>
-      </Container>
+        </Container>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '10%',
+            right: '-5%',
+            width: 200,
+            height: 200,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${theme.palette.secondary.main}20 0%, transparent 70%)`,
+            opacity: 0.6,
+            animation: 'float 8s ease-in-out infinite',
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: '15%',
+            left: '-3%',
+            width: 150,
+            height: 150,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${theme.palette.primary.main}15 0%, transparent 70%)`,
+            opacity: 0.7,
+            animation: 'float 6s ease-in-out infinite reverse',
+          }}
+        />
+      </Box>
 
       {/* Testimonials Section */}
-      <Box sx={{ backgroundColor: 'grey.50', py: { xs: 6, md: 10 } }}>
-        <Container maxWidth="md">
+      <Box 
+        sx={{ 
+          background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, #FEF3E2 50%, ${theme.palette.background.default} 100%)`,
+          py: { xs: 10, md: 16 },
+          position: 'relative',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'60\' height=\'60\' viewBox=\'0 0 60 60\'%3E%3Cg fill-rule=\'evenodd\'%3E%3Cg fill=\'%23FCD34D\' fill-opacity=\'0.05\'%3E%3Cpath d=\'m36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+          },
+        }}
+      >
+        <Container maxWidth="lg">
           <Typography
-            variant="h3"
+            variant="h2"
             align="center"
             sx={{
-              mb: 6,
-              fontSize: { xs: '2rem', md: '3rem' },
-              fontWeight: 'bold',
-              color: theme.palette.primary.main,
+              mb: 4,
+              fontSize: { xs: '2.5rem', md: '3.8rem' },
+              fontWeight: 800,
+              background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              position: 'relative',
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                bottom: '-15px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                width: 100,
+                height: 4,
+                background: `linear-gradient(90deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.light})`,
+                borderRadius: 2,
+              },
             }}
           >
             מה אומרים עלינו?
           </Typography>
+          <Typography
+            variant="h6"
+            align="center"
+            color="text.secondary"
+            sx={{ mb: 10, fontSize: '1.3rem', maxWidth: 600, mx: 'auto' }}
+          >
+            שימו לב למה שהלקוחות שלנו אומרים עלינו
+          </Typography>
           
-          <Grid container spacing={3}>
+          <Grid container spacing={4}>
             {testimonials.map((testimonial, index) => (
               <Grid size={{ xs: 12, md: 4 }} key={index}>
-                <Fade in={loaded} timeout={1500 + index * 200}>
+                <Fade in={loaded} timeout={1800 + index * 300}>
                   <Card
                     sx={{
-                      p: 3,
+                      p: 5,
                       height: '100%',
                       textAlign: 'center',
-                      border: '2px solid',
-                      borderColor: 'grey.200',
+                      background: 'linear-gradient(145deg, #FFFFFF 0%, #FEFEFE 100%)',
+                      border: '1px solid',
+                      borderColor: 'rgba(220, 38, 38, 0.1)',
+                      borderRadius: 4,
+                      position: 'relative',
+                      overflow: 'hidden',
+                      transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                      '&::before': {
+                        content: '"\"201C"',
+                        position: 'absolute',
+                        top: 20,
+                        right: 20,
+                        fontSize: '4rem',
+                        color: theme.palette.secondary.main,
+                        opacity: 0.3,
+                        fontFamily: 'Georgia, serif',
+                        lineHeight: 1,
+                      },
                       '&:hover': {
                         borderColor: theme.palette.secondary.main,
-                        transform: 'translateY(-5px)',
+                        transform: 'translateY(-10px) scale(1.03)',
+                        boxShadow: `0 20px 40px -10px rgba(220, 38, 38, 0.2), 0 0 0 1px ${theme.palette.secondary.main}20`,
+                        '& .testimonial-avatar': {
+                          transform: 'scale(1.1)',
+                          boxShadow: `0 8px 25px ${theme.palette.primary.main}30`,
+                        },
+                        '& .testimonial-rating': {
+                          '& .MuiRating-iconFilled': {
+                            color: theme.palette.secondary.main,
+                            transform: 'scale(1.1)',
+                          },
+                        },
                       },
-                      transition: 'all 0.3s ease',
                     }}
                   >
                     <Avatar
+                      className="testimonial-avatar"
                       sx={{
-                        width: 60,
-                        height: 60,
+                        width: 80,
+                        height: 80,
                         mx: 'auto',
-                        mb: 2,
+                        mb: 3,
                         bgcolor: theme.palette.primary.main,
+                        fontSize: '2rem',
+                        fontWeight: 'bold',
+                        transition: 'all 0.3s ease',
+                        border: `3px solid ${theme.palette.secondary.main}30`,
                       }}
                     >
                       {testimonial.name[0]}
                     </Avatar>
-                    <Rating value={testimonial.rating} readOnly sx={{ mb: 2 }} />
-                    <Typography variant="body1" sx={{ mb: 2, fontStyle: 'italic' }}>
-                      "{testimonial.text}"
+                    <Rating 
+                      className="testimonial-rating"
+                      value={testimonial.rating} 
+                      readOnly 
+                      sx={{ 
+                        mb: 3,
+                        '& .MuiRating-iconFilled': {
+                          color: theme.palette.primary.main,
+                          transition: 'all 0.3s ease',
+                        },
+                        '& .MuiRating-iconEmpty': {
+                          color: 'rgba(220, 38, 38, 0.2)',
+                        },
+                      }} 
+                    />
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        mb: 3, 
+                        fontStyle: 'italic',
+                        fontSize: '1.1rem',
+                        lineHeight: 1.6,
+                        position: 'relative',
+                        zIndex: 1,
+                        '&::before': {
+                          content: '"\"201C"',
+                          fontSize: '1.5rem',
+                          color: theme.palette.secondary.main,
+                          marginRight: '0.2rem',
+                        },
+                        '&::after': {
+                          content: '"\"201D"',
+                          fontSize: '1.5rem',
+                          color: theme.palette.secondary.main,
+                          marginLeft: '0.2rem',
+                        },
+                      }}
+                    >
+                      {testimonial.text}
                     </Typography>
-                    <Typography variant="subtitle2" color="text.secondary">
+                    <Typography 
+                      variant="h6" 
+                      sx={{
+                        fontWeight: 600,
+                        color: theme.palette.primary.main,
+                        position: 'relative',
+                        '&::before': {
+                          content: '""',
+                          position: 'absolute',
+                          top: '-10px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          width: 30,
+                          height: 2,
+                          backgroundColor: theme.palette.secondary.main,
+                          borderRadius: 1,
+                        },
+                      }}
+                    >
                       {testimonial.name}
                     </Typography>
                   </Card>
@@ -509,6 +743,30 @@ const HomePage = () => {
             </Box>
           </Zoom>
         </Container>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '5%',
+            left: '5%',
+            fontSize: '6rem',
+            opacity: 0.1,
+            animation: 'float 4s ease-in-out infinite',
+          }}
+        >
+          🍕
+        </Box>
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: '10%',
+            right: '8%',
+            fontSize: '4rem',
+            opacity: 0.1,
+            animation: 'float 5s ease-in-out infinite reverse',
+          }}
+        >
+          🍴
+        </Box>
       </Box>
     </>
   );

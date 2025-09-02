@@ -63,7 +63,10 @@ const Navbar = () => {
         {menuItems.map((item) => (
           <ListItem key={item.text} disablePadding>
             <ListItemButton onClick={() => navigate(item.path)}>
-              <ListItemText primary={item.text} />
+              <ListItemText 
+                primary={item.text} 
+                sx={{ color: '#FFD700' }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
@@ -127,8 +130,10 @@ const Navbar = () => {
                     sx={{ 
                       fontSize: '1.1rem',
                       fontWeight: 500,
+                      color: '#FFD700',
                       '&:hover': {
                         backgroundColor: 'rgba(255,255,255,0.1)',
+                        color: '#FFC107',
                       }
                     }}
                   >
