@@ -21,6 +21,7 @@ import { Add, LocalPizza } from '@mui/icons-material';
 import { IPizza, ITopping, PizzaCardProps } from '../../types';
 import { useCart } from '../../contexts/CartContext';
 import { menuAPI } from '../../services/api';
+import pizzaImage from '../../assets/pizza.jpg';
 
 
 const PizzaCard = ({ pizzas }: PizzaCardProps) => {
@@ -108,7 +109,7 @@ const PizzaCard = ({ pizzas }: PizzaCardProps) => {
               <CardMedia
                 component="img"
                 height="200"
-                image={pizza.image || '/pizza-placeholder.jpg'}
+                image={pizzaImage}
                 alt={pizza.name}
                 sx={{ objectFit: 'cover' }}
               />
